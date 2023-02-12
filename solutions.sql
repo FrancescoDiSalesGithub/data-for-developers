@@ -1,1 +1,3 @@
 insert into solutions values('DOCKER','DOCKER1','create a local repository','sudo run docker pull registry; run docker -p 5000:5000; docker tag image:version localhost:5000/image:version; docker push localhost:5000/image:version');
+insert into solutions values('PSQLDB','PSQLDB1','change location to store data','go into psql and type show data directory. with an editor edit the following line on the file /etc/postgresql/9.5/main/postgresql.conf; find the following line: data_directory = /custom_path; restart postgresql. To check the new directory log with psql on your database and run show data_directory');
+
