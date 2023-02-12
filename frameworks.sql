@@ -1,1 +1,11 @@
 insert into framework  values ('PSQLDB','Postgresql','database');
+insert into framework values('REDISDB','Redis','database');
+insert into framework values('DOCKER','Docker','devops');
+insert into framework values('DOCKER-COMPOSE','Docker-compose','devops');
+insert into framework values('KUBERNETS','kubernets','devops');
+insert into framework values('GIT','git','devops');
+insert into framework values('MAVEN','maven','develop');
+insert into framework values('BASH','bash scripting','develop');
+insert into framework values('PYTHON','python scripting','develop');
+insert into framework values('RUBY','ruby scripting','develop');
+insert into framework values('SPRINGBOOT','springboot','develop');
