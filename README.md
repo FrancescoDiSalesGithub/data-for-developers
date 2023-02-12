@@ -15,3 +15,7 @@ The frameworks table has the following fields:
 * category
 
 The solutions table has the solutions for each framework, it is linked to the frameworks table with the foreign key **code**.
+
+# How to run
+
+Create your database as **developer** and then create a schema if you don't want to use the public one, remember to set is as default schema. Run the tables sql file and then the frameworks sql file.
