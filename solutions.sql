@@ -1,0 +1,1 @@
+insert into solutions values('DOCKER','DOCKER1','create a local repository','sudo run docker pull registry; run docker -p 5000:5000; docker tag image:version localhost:5000/image:version; docker push localhost:5000/image:version');
