@@ -18,4 +18,4 @@ The solutions table has the solutions for each framework, it is linked to the fr
 
 # How to run
 
-Create your database as **developer** and then create a schema if you don't want to use the public one, remember to set is as default schema. Run the tables sql file and then the frameworks sql file.
+Create your database as **developer** and then create a schema if you don't want to use the public one, remember to set it as default schema. Run the tables sql file and then the frameworks sql file and the solutions sql file.
