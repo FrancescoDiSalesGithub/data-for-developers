@@ -1,5 +1,5 @@
 # data-for-developers
-simple SQL database with problems and solution found on stackoverflow or documentation
+simple SQL database with problems and solution found on stackoverflow or documentation or chatgpt
 
 # Introduction
 
