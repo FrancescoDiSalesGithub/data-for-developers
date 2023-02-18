@@ -12,7 +12,7 @@ create table solutions
 	code varchar(100),
 	code_problem varchar(100),
 	problem varchar(100),
-	solution varchar(1000),
+	solution varchar(999999),
 	
 	primary key(code_problem),
 	foreign key (code) references framework(code)
