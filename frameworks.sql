@@ -13,5 +13,5 @@ INSERT INTO framework (code,"name",category) VALUES
 	 ('NGINX','nginx server','devops');
    
 INSERT INTO framework (code,"name",category) VALUES
-	 ('SPRINGBOOT','springboot','developer');
+	 ('SPRINGBOOT','springboot','develop');
    
