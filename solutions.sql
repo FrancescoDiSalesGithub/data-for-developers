@@ -1,4 +1,4 @@
-INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO solutions (code,code_problem,problem,solution) VALUES
 	 ('DOCKER','DOCKER1','create a local repository','sudo run docker pull registry; run docker -p 5000:5000; docker tag image:version localhost:5000/image:version; docker push localhost:5000/image:version'),
 	 ('PSQLDB','PSQLDB1','change location to store data','change location to store data,go into psql and type show data directory. with an editor edit the following line on the file /etc/postgresql/9.5/main/postgresql.conf; find the following line: data_directory = /custom_path; restart postgresql. To check the new directory log with psql on your database and run show data_directory'),
 	 ('BASH','BASH1','how to do an if in bash','if [ condition ]; then fi'),
@@ -396,4 +396,62 @@ On CentOS or Red Hat systems, you can run:
 
     sudo systemctl restart nginx
 
-Once you have completed these steps, you should be able to send requests to your Python application by visiting the URL of your Nginx server in your web browser or by sending requests to this URL from your application. Nginx will forward the request to your Python application server, which will process the request and return the result to Nginx, which will then serve it to the client.');
+Once you have completed these steps, you should be able to send requests to your Python application by visiting the URL of your Nginx server in your web browser or by sending requests to this URL from your application. Nginx will forward the request to your Python application server, which will process the request and return the result to Nginx, which will then serve it to the client.'),
+	 ('NGINX','NGINX12','how to add ruby in nginx','Nginx is a web server and reverse proxy, and it can be used with various application servers to serve dynamic content, including Ruby applications. One of the most popular application servers for Ruby is Unicorn. Here are the general steps for using Nginx with Unicorn to serve Ruby applications:
+
+    Install Ruby and RubyGems on your server.
+
+    Install the bundler gem using the following command:
+
+gem install bundler
+
+    Create a new Ruby project and add your Ruby code to it.
+
+    Add a Gemfile to your project that lists the dependencies required for your application, including the Unicorn server.
+
+    Install the dependencies using Bundler by running the command:
+
+bundle install
+
+    Configure Unicorn by creating a configuration file. Here"s an example of a Unicorn configuration file:
+
+worker_processes 2
+working_directory "/var/www/my_app"
+listen "/var/run/unicorn.sock", :backlog => 64
+timeout 30
+pid "/var/run/unicorn.pid"
+stderr_path "/var/log/unicorn.log"
+stdout_path "/var/log/unicorn.log"
+
+This configuration file specifies that two worker processes should be used, sets the working directory to /var/www/my_app, and sets the socket file path to /var/run/unicorn.sock.
+
+    Start the Unicorn server by running the command:
+
+bundle exec unicorn -c /path/to/unicorn/config.rb
+
+Configure Nginx to proxy requests to Unicorn. Here"s an example Nginx configuration file:
+
+
+
+upstream unicorn_server {
+  server unix:/var/run/unicorn.sock fail_timeout=0;
+}
+server {
+  listen 80;
+  server_name my_app.com;
+  root /var/www/my_app/public;
+  location / {
+    proxy_pass http://unicorn_server;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+
+This configuration file specifies that Nginx should listen on port 80 for requests to the my_app.com domain, set the root directory to /var/www/my_app/public, and proxy requests to the Unicorn server using the socket file path /var/run/unicorn.sock.
+
+    Restart Nginx to apply the new configuration by running the command:
+
+sudo service nginx restart
+
+With these steps, Nginx should now be set up to serve Ruby applications using Unicorn.');
