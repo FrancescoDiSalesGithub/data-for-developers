@@ -123,4 +123,24 @@ The second server block listens on port 443 and specifies the SSL certificate an
 
 The location block specifies that all requests to the server should be forwarded to the backend servers, as in the previous example. The proxy_pass directive forwards the requests to the http://backend upstream group, which can contain one or more backend servers.
 
-By terminating SSL at the Nginx server, you can offload the resource-intensive task of decrypting SSL traffic from your backend servers, improving their performance and scalability. It also allows you to centralize SSL certificate management and implement advanced security features such as SSL client authentication, certificate revocation lists, and protocol filtering.');
+By terminating SSL at the Nginx server, you can offload the resource-intensive task of decrypting SSL traffic from your backend servers, improving their performance and scalability. It also allows you to centralize SSL certificate management and implement advanced security features such as SSL client authentication, certificate revocation lists, and protocol filtering.'),
+	 ('NGINX','NGINX 6','URL rewriting in NGINX','URL rewriting is the process of modifying the URL of a web page in order to change its structure, appearance, or behavior. This is typically done by a web server, such as Nginx, using regular expressions to match and replace parts of the URL.
+
+URL rewriting can be used for a variety of purposes, such as improving the search engine optimization (SEO) of a website, creating user-friendly URLs, and implementing advanced routing and redirection rules.
+
+Here there is an example of how URL rewriting can be used to rewrite a URL with a query string into a more user-friendly format:
+
+bash
+
+location /blog {
+    if ($args ~* "id=([0-9]+)") {
+        rewrite ^/blog$ /post/$1 permanent;
+    }
+}
+
+In this example, any request to /blog that includes a query string parameter id with a numeric value will be redirected to /post/<id> using the rewrite directive. The $1 variable captures the numeric value of the id parameter and inserts it into the rewritten URL.
+
+URL rewriting can also be used to implement more advanced routing and redirection rules, such as redirecting users to a new URL when a page has been moved or archived, or routing requests to different backend servers based on the URL path or host name.
+
+Overall, URL rewriting is a powerful tool that can be used to improve the functionality and usability of a website, as well as to implement advanced routing and redirection rules that can improve website performance, SEO, and security.
+');
