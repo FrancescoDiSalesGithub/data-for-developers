@@ -1,4 +1,4 @@
-INSERT INTO solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
 	 ('DOCKER','DOCKER1','create a local repository','sudo run docker pull registry; run docker -p 5000:5000; docker tag image:version localhost:5000/image:version; docker push localhost:5000/image:version'),
 	 ('PSQLDB','PSQLDB1','change location to store data','change location to store data,go into psql and type show data directory. with an editor edit the following line on the file /etc/postgresql/9.5/main/postgresql.conf; find the following line: data_directory = /custom_path; restart postgresql. To check the new directory log with psql on your database and run show data_directory'),
 	 ('BASH','BASH1','how to do an if in bash','if [ condition ]; then fi'),
@@ -143,4 +143,257 @@ In this example, any request to /blog that includes a query string parameter id 
 URL rewriting can also be used to implement more advanced routing and redirection rules, such as redirecting users to a new URL when a page has been moved or archived, or routing requests to different backend servers based on the URL path or host name.
 
 Overall, URL rewriting is a powerful tool that can be used to improve the functionality and usability of a website, as well as to implement advanced routing and redirection rules that can improve website performance, SEO, and security.
-');
+'),
+	 ('NGINX','NGINX7','subdomains in nginx','In Nginx, subdomains can be configured using server blocks that are defined for each subdomain. Here there is an example configuration that demonstrates how to serve different content for different subdomains:
+
+perl
+
+server {
+    listen 80;
+    server_name example.com;
+
+    root /var/www/example.com;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+server {
+    listen 80;
+    server_name blog.example.com;
+
+    root /var/www/blog.example.com;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+server {
+    listen 80;
+    server_name api.example.com;
+
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+
+In this example, we have three server blocks:
+
+    The first server block handles requests for the main domain example.com and serves content from the directory /var/www/example.com.
+
+    The second server block handles requests for the subdomain blog.example.com and serves content from the directory /var/www/blog.example.com.
+
+    The third server block handles requests for the subdomain api.example.com and proxies requests to a backend server running on localhost:8000. The proxy_set_header directives are used to set the Host and X-Real-IP headers for the proxied requests.
+
+By using different server blocks for each subdomain, you can configure different settings and behaviors for each subdomain, such as serving different content, using different proxy settings, or applying different security policies.');
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
+	 ('NGINX','NGINX8','php in nginx','To add PHP to Nginx, you need to install and configure a PHP processor like PHP-FPM (FastCGI Process Manager) and configure Nginx to pass PHP requests to the PHP processor using the FastCGI protocol. Here are the general steps to install and configure PHP-FPM and Nginx on a Linux system:
+
+    Install PHP and PHP-FPM:
+
+    On Ubuntu or Debian systems, you can run:
+
+sudo apt update
+sudo apt install php-fpm php-mysql
+
+On CentOS or Red Hat systems, you can run:
+
+sudo yum update
+sudo yum install php-fpm php-mysql
+
+Configure PHP-FPM:
+
+Edit the PHP-FPM configuration file /etc/php-fpm.d/www.conf to configure the user and group under which PHP-FPM should run. By default, the user and group are set to www-data on Ubuntu and nginx on CentOS. You may also want to adjust the number of child processes and other settings depending on your server"s resources and the workload.
+
+Configure Nginx:
+
+Edit the Nginx configuration file /etc/nginx/sites-available/default to add the PHP handling directives to the location block for PHP files. Here there is an example configuration:
+
+
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+    }
+}
+
+This configuration specifies that requests for PHP files should be passed to the FastCGI server running on the Unix socket /var/run/php/php7.4-fpm.sock. The snippets/fastcgi-php.conf file contains the FastCGI handling directives for PHP, including the fastcgi_param directives that set the environment variables that PHP-FPM needs to process the request.
+
+Restart the services:
+
+After making changes to the PHP-FPM and Nginx configuration files, you need to restart both services to apply the changes. On Ubuntu or Debian systems, you can run:
+
+sudo systemctl restart php7.4-fpm
+sudo systemctl restart nginx
+
+On CentOS or Red Hat systems, you can run:
+
+    sudo systemctl restart php-fpm
+    sudo systemctl restart nginx
+
+Once you have completed these steps, you should be able to serve PHP scripts through Nginx. You can test this by creating a PHP file in your document root directory (e.g., /var/www/html) and visiting it in your web browser.'),
+	 ('NGINX','NGINX 9','jsp in nginx','Nginx is primarily designed to serve static content, and does not have built-in support for JSP (JavaServer Pages) files. However, you can use Nginx as a reverse proxy to forward requests to a Java application server like Tomcat, which can handle JSP requests. Here are the general steps to set up Nginx as a reverse proxy for a Java application server:
+
+    Install Java and Tomcat:
+
+    To run a Java application server like Tomcat, you will need to have Java installed on your system. You can install Java and Tomcat using your system"s package manager or by downloading and installing them manually from their official websites.
+
+    Configure Tomcat:
+
+    Before configuring Nginx, you need to configure Tomcat to listen on a port that Nginx can forward requests to. By default, Tomcat listens on port 8080, but you can change this by editing the server.xml configuration file in the Tomcat conf directory.
+
+    Configure Nginx:
+
+    Edit the Nginx configuration file /etc/nginx/sites-available/default to add a location block that forwards requests to Tomcat. Here there is an example configuration:
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /tomcat/ {
+        proxy_pass http://localhost:8080/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+This configuration specifies that requests for URLs starting with /tomcat/ should be forwarded to the Tomcat server running on localhost:8080. The proxy_set_header directives are used to set the headers that Tomcat expects to receive, including the Host header, which specifies the virtual host name of the request.
+
+Restart the services:
+
+After making changes to the Nginx and Tomcat configuration files, you need to restart both services to apply the changes. On Ubuntu or Debian systems, you can run:
+
+sudo systemctl restart nginx
+sudo systemctl restart tomcat
+
+On CentOS or Red Hat systems, you can run:
+
+    sudo systemctl restart nginx
+    sudo systemctl restart tomcat
+
+Once you have completed these steps, you should be able to access your JSP application by visiting the URL http://<your-server>/tomcat/ in your web browser. Nginx will forward the request to Tomcat, which will process the JSP and return the result to Nginx, which will then serve it to the client.'),
+	 ('NGINX','NGINX10','how to add a database in nginx','Nginx is primarily designed to serve HTTP and HTTPS requests and is not a database server. However, you can use Nginx to reverse proxy requests to a database server that is listening on a separate port or is located on a different machine. Here"s an example of how you can configure Nginx to proxy requests to a database server:
+
+    Install the database server:
+
+    Before you can configure Nginx to proxy requests to the database server, you need to have a database server installed on your system. Depending on the database you want to use, you can install MySQL, PostgreSQL, MongoDB, or other database servers.
+
+    Configure the database server:
+
+    After installing the database server, you need to configure it to listen on a specific port or a Unix domain socket. Depending on the database you are using, you can configure it using its configuration file or command line options.
+
+    Configure Nginx:
+
+    Edit the Nginx configuration file /etc/nginx/sites-available/default to add a location block that forwards requests to the database server. Here"s an example configuration for MySQL:
+    
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location /mysql/ {
+        proxy_pass http://localhost:3306/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+
+This configuration specifies that requests for URLs starting with /mysql/ should be forwarded to the MySQL server running on localhost:3306. The proxy_set_header directives are used to set the headers that MySQL expects to receive.
+
+Restart the Nginx service:
+
+After making changes to the Nginx configuration file, you need to restart the Nginx service to apply the changes. On Ubuntu or Debian systems, you can run:
+
+sudo systemctl restart nginx
+
+On CentOS or Red Hat systems, you can run:
+
+    sudo systemctl restart nginx
+
+Once you have completed these steps, you should be able to send requests to the database server by visiting the URL http://<your-server>/mysql/ in your web browser or by sending requests to this URL from your application. Nginx will forward the request to the database server, which will process the request and return the result to Nginx, which will then serve it to the client. Note that you should only use this setup for testing purposes and not for production environments. In a production environment, you should use a separate database server and not expose it directly to the internet.'),
+	 ('NGINX','NGINX11','how to add python in nginx','Nginx itself does not execute Python code, but it can be used to proxy requests to a Python application server such as Gunicorn, uWSGI or mod_wsgi. Here"s a general outline of how you can add Python support to Nginx:
+
+    Install Python and a Python application server:
+
+    Before you can use Python with Nginx, you need to have Python and a Python application server installed on your system. Depending on your application and needs, you can use Gunicorn, uWSGI or mod_wsgi as your Python application server. You can install Python and your chosen application server using your distribution"s package manager or by downloading them from their respective websites.
+
+    Create a Python application:
+
+    Once you have installed the necessary packages, you need to create a Python application that will handle requests. This application should be able to receive requests from the application server and return a response. You can use a Python web framework such as Flask, Django or Pyramid to build your application.
+
+    Configure your Python application server:
+
+    After creating your Python application, you need to configure your chosen Python application server to handle requests from Nginx. This usually involves setting up the application server to listen on a socket or port, and to start your application. The specific steps will depend on the application server you have chosen.
+
+    Configure Nginx:
+
+    Edit the Nginx configuration file /etc/nginx/sites-available/default to add a location block that forwards requests to your Python application server. Here"s an example configuration for Gunicorn:
+
+
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+This configuration specifies that requests for URLs starting with / should be forwarded to the Gunicorn server running on localhost:8000. The proxy_set_header directives are used to set the headers that Gunicorn expects to receive.
+
+Restart the Nginx service:
+
+After making changes to the Nginx configuration file, you need to restart the Nginx service to apply the changes. On Ubuntu or Debian systems, you can run:
+
+sudo systemctl restart nginx
+
+On CentOS or Red Hat systems, you can run:
+
+    sudo systemctl restart nginx
+
+Once you have completed these steps, you should be able to send requests to your Python application by visiting the URL of your Nginx server in your web browser or by sending requests to this URL from your application. Nginx will forward the request to your Python application server, which will process the request and return the result to Nginx, which will then serve it to the client.');
