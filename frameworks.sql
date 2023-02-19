@@ -10,7 +10,10 @@ INSERT INTO framework (code,"name",category) VALUES
 	 ('PYTHON','python scripting','develop'),
 	 ('RUBY','ruby scripting','develop');
 INSERT INTO framework (code,"name",category) VALUES
-	 ('NGINX','nginx server','devops');
+	 ('NGINX','nginx server','devops'),
+	 ('ML','machine learning','data science'),
+	 ('JENKINS','jenkins','devops');
+
    
 INSERT INTO framework (code,"name",category) VALUES
 	 ('SPRINGBOOT','springboot','develop');
