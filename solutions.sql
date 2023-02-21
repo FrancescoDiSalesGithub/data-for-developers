@@ -1,4 +1,4 @@
-INSERT INTO solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
 	 ('DOCKER','DOCKER1','create a local repository','sudo run docker pull registry; run docker -p 5000:5000; docker tag image:version localhost:5000/image:version; docker push localhost:5000/image:version'),
 	 ('PSQLDB','PSQLDB1','change location to store data','change location to store data,go into psql and type show data directory. with an editor edit the following line on the file /etc/postgresql/9.5/main/postgresql.conf; find the following line: data_directory = /custom_path; restart postgresql. To check the new directory log with psql on your database and run show data_directory'),
 	 ('BASH','BASH1','how to do an if in bash','if [ condition ]; then fi'),
@@ -192,7 +192,7 @@ In this example, we have three server blocks:
     The third server block handles requests for the subdomain api.example.com and proxies requests to a backend server running on localhost:8000. The proxy_set_header directives are used to set the Host and X-Real-IP headers for the proxied requests.
 
 By using different server blocks for each subdomain, you can configure different settings and behaviors for each subdomain, such as serving different content, using different proxy settings, or applying different security policies.');
-INSERT INTO solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
 	 ('NGINX','NGINX8','php in nginx','To add PHP to Nginx, you need to install and configure a PHP processor like PHP-FPM (FastCGI Process Manager) and configure Nginx to pass PHP requests to the PHP processor using the FastCGI protocol. Here are the general steps to install and configure PHP-FPM and Nginx on a Linux system:
 
     Install PHP and PHP-FPM:
@@ -711,7 +711,7 @@ print(prediction)
 The output should be a predicted salary based on the new features.
 
 That''s a basic example of how to perform multivariate linear regression in Python using scikit-learn. Keep in mind that there are many other factors to consider when working with real-world data, such as feature scaling, feature selection, and dealing with missing data, among others.');
-INSERT INTO solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
 	 ('ML','ML6','teach me about gradient descent in machine learning','Gradient descent is an iterative optimization algorithm used in machine learning to find the optimal parameters for a given model. It is a first-order iterative optimization algorithm that aims to minimize the cost or loss function of the model. The cost or loss function is a measure of how well the model is performing on the training data.
 
 The basic idea of gradient descent is to iteratively adjust the parameters of the model in the direction of the negative gradient of the cost or loss function. In other words, the algorithm follows the slope of the cost function downhill to reach the minimum point, which is the point where the cost function is minimized.
@@ -1152,7 +1152,7 @@ y_pred = clf.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, y_pred))
 
 This will output the accuracy of the model on the test data.');
-INSERT INTO solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
 	 ('ML','ML17','teach me about decision trees in machine learning','Decision trees are a type of supervised machine learning algorithm that are commonly used for classification and regression tasks. The basic idea behind a decision tree is to recursively split the dataset into smaller subsets, based on the values of the input features, until a stopping criterion is reached. At each split, the algorithm selects the feature that provides the most information gain with respect to the target variable.
 
 A decision tree consists of a series of nodes that represent the features in the dataset, and branches that represent the possible values that each feature can take. The root node represents the entire dataset, and each subsequent node represents a subset of the data that is split based on a particular feature. The leaves of the tree represent the predicted output.
@@ -1602,7 +1602,7 @@ plt.show()
 This code will generate a scatter plot of the data, with the clusters colored in red, green, and blue, and the cluster centers marked with a black star.
 
 That''s it! This is a simple example of how to use KMeans clustering in Python to group data points into clusters based on their similarity. The algorithm works by iteratively re-assigning points to the nearest cluster center until the clusters are stable. The result is a set of clusters, each represented by a centroid that captures the average of the points in that cluster.');
-INSERT INTO solutions (code,code_problem,problem,solution) VALUES
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
 	 ('ML','ML27','teach me about naive bayes in machine learning','Naive Bayes is a probabilistic machine learning algorithm that is commonly used in text classification and spam filtering. It is based on Bayes'' theorem, which describes the probability of a hypothesis given the data.
 
 The "naive" assumption in Naive Bayes is that the features (or attributes) are conditionally independent of each other, given the class label. This means that the probability of a feature given the class label can be calculated independently of the other features.
@@ -2061,4 +2061,222 @@ This pipeline script has three stages: "Checkout", "Build", and "Test". The chec
 
     You can now run the pipeline by clicking "Build Now". Jenkins will execute each stage of the pipeline in order. You can monitor the progress of the pipeline in the build console output.
 
-That''s a basic example of creating a pipeline in Jenkins. You can add more stages and steps to your pipeline script to suit your needs.');
+That''s a basic example of creating a pipeline in Jenkins. You can add more stages and steps to your pipeline script to suit your needs.'),
+	 ('QEMU','qemu1','how to convert a vdi image to a qcow2 image','To convert a VDI image to a QCOW2 image, you can use the "qemu-img" command-line tool. Here are the steps:
+
+    Install "qemu-utils" package on your Linux system using the package manager:
+
+csharp
+
+sudo apt-get install qemu-utils
+
+    Navigate to the directory where your VDI image is located.
+
+bash
+
+cd /path/to/vdi/image/
+
+    Use the following command to convert the VDI image to QCOW2 format:
+
+css
+
+qemu-img convert -f vdi -O qcow2 input_image.vdi output_image.qcow2
+
+Here, replace "input_image.vdi" with the name of your VDI image file, and "output_image.qcow2" with the desired name for the converted QCOW2 image file.
+
+    Wait for the conversion process to complete. Once it''s done, you will see the new QCOW2 image file in the same directory as the VDI image.
+
+That''s it! You have now successfully converted a VDI image to a QCOW2 image using the "qemu-img" tool.');
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES
+	 ('QEMU','qemu2','how to convert a virtual box image to a qemu image','To convert a VDI image to a QCOW2 image, you can use the "qemu-img" command-line tool. Here are the steps:
+
+    Install "qemu-utils" package on your Linux system using the package manager:
+
+csharp
+
+sudo apt-get install qemu-utils
+
+    Navigate to the directory where your VDI image is located.
+
+bash
+
+cd /path/to/vdi/image/
+
+    Use the following command to convert the VDI image to QCOW2 format:
+
+css
+
+qemu-img convert -f vdi -O qcow2 input_image.vdi output_image.qcow2
+
+Here, replace "input_image.vdi" with the name of your VDI image file, and "output_image.qcow2" with the desired name for the converted QCOW2 image file.
+
+    Wait for the conversion process to complete. Once it''s done, you will see the new QCOW2 image file in the same directory as the VDI image.
+
+That''s it! You have now successfully converted a VDI image to a QCOW2 image using the "qemu-img" tool.'),
+	 ('QEMU','qemu3','how to install qemu virt manager','sudo apt install -y qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat'),
+	 ('SPRINGBOOT','SPRINGBOOT1','How to do a controller','Import from maven the springboot starter web dependency, and then use the @RestController annotation'),
+	 ('ANSIBLE','ANSIBLE1','introduction to ansible','Ansible is a popular open-source automation tool that is used for IT orchestration, configuration management, and application deployment. It allows users to automate repetitive tasks and streamline the configuration of multiple servers. Ansible uses a declarative language that is easy to learn and allows users to define the desired state of their systems, rather than focusing on specific commands to execute.
+
+Here are some key concepts in Ansible:
+
+    Playbook: Ansible uses playbooks to describe the configuration and automation tasks. Playbooks are written in YAML format and are easy to read and understand. Each playbook contains a list of tasks that are executed on the target servers.
+
+    Inventory: The inventory file is used to specify the servers that Ansible will manage. The inventory can be a simple text file or can use dynamic inventory scripts to generate the list of servers on the fly.
+
+    Module: Ansible modules are used to execute specific actions on the target servers. Modules are included in Ansible and can be extended by users to meet their specific needs.
+
+    Task: Ansible tasks are the individual steps that are executed on the target servers. Each task specifies a module to execute and any necessary arguments.
+
+    Role: An Ansible role is a collection of tasks, templates, and variables that are grouped together to perform a specific function. Roles can be used to organize and reuse common sets of tasks.
+
+Here is an example of an Ansible playbook that installs and starts the Apache web server on a set of servers:
+
+yaml
+
+---
+- name: Install and start Apache
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+    - name: Start Apache
+      service:
+        name: httpd
+        state: started
+
+In this example, the playbook is named "Install and start Apache" and is executed on the hosts listed under the "webservers" group in the inventory. The become keyword is used to run the tasks with root privileges. There are two tasks included in this playbook: the first installs the Apache web server using the yum module, and the second starts the Apache service using the service module.
+
+To run this playbook, you can use the ansible-playbook command:
+
+ansible-playbook apache.yml
+
+This will execute the playbook on the target servers and install and start the Apache web server.'),
+	 ('ANSIBLE','ANSIBLE2','how to write a playbook in ansible','To write a playbook in Ansible, you will need to follow these general steps:
+
+    Define your hosts: Start by defining the hosts you want to run the playbook on, and group them if necessary.
+
+    Define your variables: Next, define any variables you will need to use in your playbook. These can be defined in a separate file or included in the playbook itself.
+
+    Write your tasks: Write the tasks you want to perform on each host. Each task should have a name, a module to use, and any required parameters.
+
+    Organize your tasks: Organize your tasks into plays. A play is a set of tasks that are run on a specific set of hosts.
+
+    Add any necessary conditions: Add any necessary conditions to your playbook, such as when a task should run or when a play should be skipped.
+
+    Save and run the playbook: Save your playbook and run it using the ansible-playbook command.'),
+	 ('ANSIBLE','ANSIBLE3','edit an ansible inventory','In Ansible, an inventory is a file that contains a list of hosts or groups of hosts on which you want to execute a set of tasks. The inventory file can be in various formats, such as an INI file, YAML file, or even a dynamic inventory that is generated by a script or a plugin.
+
+To edit an inventory in Ansible, you can follow these steps:
+
+    Locate the inventory file: The default location for the inventory file is /etc/ansible/hosts. You can also specify a custom inventory file using the -i option.
+
+    Open the inventory file: You can use any text editor to open the inventory file. For example, you can use the nano editor to open the default inventory file by running the following command:
+
+    bash
+
+sudo nano /etc/ansible/hosts
+
+Edit the inventory: Once the inventory file is open, you can add, modify or remove hosts or groups of hosts as per your requirement. The inventory file follows a specific syntax, depending on the format of the file.
+
+For example, if you are using an INI format for the inventory file, you can define hosts or groups of hosts as follows:
+
+csharp
+
+[webserver]
+192.168.1.100
+192.168.1.101
+
+[database]
+192.168.1.102
+
+If you are using a YAML format for the inventory file, you can define hosts or groups of hosts as follows:
+
+yaml
+
+    all:
+      hosts:
+        192.168.1.100:
+        192.168.1.101:
+      children:
+        webserver:
+          hosts:
+            192.168.1.100:
+            192.168.1.101:
+        database:
+          hosts:
+            192.168.1.102:
+
+    Save the changes: Once you have made the necessary changes to the inventory file, save the changes and exit the text editor.
+
+Note that you can also use dynamic inventories that are generated by a script or a plugin. In such cases, the inventory is not stored in a file, but is generated on-the-fly by executing the script or plugin. The dynamic inventory can be used to manage large and complex environments that are subject to frequent changes.'),
+	 ('ANSIBLE','ANSIBLE4','edit an ansible inventory with yaml file','You can edit an Ansible inventory in a YAML file by following these steps:
+
+    Locate the inventory file: Ansible inventory can be stored in a file or in a directory of files. By default, Ansible looks for inventory in /etc/ansible/hosts. You can check your Ansible configuration file to see the location of your inventory file.
+
+    Open the inventory file: Open the inventory file in your preferred text editor. The inventory file is in YAML format, which means it has a hierarchical structure with indentation.
+
+    Modify the inventory: You can add, modify, or remove hosts, groups, and variables in the inventory file. For example, to add a new host to the inventory, you can add the hostname or IP address under the appropriate group. If you want to add a new group, you can create a new YAML block under the all group.
+
+    Save the changes: After making the changes, save the file and close it.
+
+Here''s an example of what an inventory file in YAML format might look like:
+
+less
+
+all:
+  hosts:
+    webserver:
+      ansible_host: 192.168.1.100
+    database:
+      ansible_host: 192.168.1.101
+  children:
+    webservers:
+      hosts:
+        webserver:
+    databases:
+      hosts:
+        database:
+
+In this example, there are two hosts (webserver and database) and two groups (webservers and databases). The webserver host has an IP address of 192.168.1.100, and the database host has an IP address of 192.168.1.101. The webservers group contains only the webserver host, and the databases group contains only the database host.'),
+	 ('ANSIBLE','ANSIBLE5','how to write an ansible module','Writing an Ansible module can be a bit more involved than writing a playbook, as it requires knowledge of Python and the Ansible module API. Here is a high-level overview of the process for writing an Ansible module:
+
+    Determine the task or set of tasks that the module will perform. This could be anything from installing software to configuring a network device.
+
+    Write the module code in Python. Modules are typically written as functions that take arguments and return JSON-formatted data to Ansible. You can use the Ansible module API to take care of some of the common tasks like argument parsing, error handling, and output formatting.
+
+    Test the module. You can run the module locally using the ansible-playbook command and the --connection=local option. Make sure the module behaves as expected and returns the correct output.
+
+    Distribute the module. Once the module is tested and working, you can distribute it to other Ansible users by packaging it as a standalone module or contributing it to the Ansible core codebase.
+
+Here is an example of a very simple Ansible module that writes a message to a file:
+
+python
+
+#!/usr/bin/python
+
+from ansible.module_utils.basic import AnsibleModule
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            message=dict(required=True, type=''str''),
+            dest=dict(required=True, type=''path'')
+        )
+    )
+
+    message = module.params[''message'']
+    dest = module.params[''dest'']
+
+    with open(dest, ''w'') as f:
+        f.write(message)
+
+    result = dict(changed=True, message=message, dest=dest)
+    module.exit_json(**result)
+
+if __name__ == ''__main__'':
+    main()
+
+This module takes two arguments: message and dest. It writes the message to the specified file and returns a JSON object indicating that the file was changed and the message that was written.');
