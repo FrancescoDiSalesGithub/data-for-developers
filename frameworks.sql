@@ -12,9 +12,7 @@ INSERT INTO framework (code,"name",category) VALUES
 INSERT INTO framework (code,"name",category) VALUES
 	 ('NGINX','nginx server','devops'),
 	 ('ML','machine learning','data science'),
-	 ('JENKINS','jenkins','devops');
-
-   
-INSERT INTO framework (code,"name",category) VALUES
-	 ('SPRINGBOOT','springboot','develop');
-   
+	 ('JENKINS','jenkins','devops'),
+	 ('QEMU','qemu','devops'),
+	 ('SPRINGBOOT','springboot','develop'),
+	 ('ANSIBLE','Ansible','devops');
