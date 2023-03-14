@@ -2280,3 +2280,20 @@ if __name__ == ''__main__'':
     main()
 
 This module takes two arguments: message and dest. It writes the message to the specified file and returns a JSON object indicating that the file was changed and the message that was written.');
+
+
+INSERT INTO public.solutions (code,code_problem,problem,solution) VALUES ('LINUX','LINUX1','Install vnc on linux','sudo apt install xfce4 xfce4-goodies tigervnc-standalone-server -y
+									  vncpasswd; edit ~/.vnc/xstartup  with the following line
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+/usr/bin/startxfce4
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+x-window-manager & then edit ~/.vnc/config with these lines
+
+geometry=1920x1080
+dpi=96
+
+then run chmod x ~/.vnc/xstartup and finally vncserver');
+									  
+									  
