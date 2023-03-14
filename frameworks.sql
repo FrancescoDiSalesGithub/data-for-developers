@@ -16,3 +16,6 @@ INSERT INTO framework (code,"name",category) VALUES
 	 ('QEMU','qemu','devops'),
 	 ('SPRINGBOOT','springboot','develop'),
 	 ('ANSIBLE','Ansible','devops');
+	 
+INSERT INTO framework (code,"name",category) VALUES 
+	 ('LINUX','Linux','devops');
